@@ -1,0 +1,79 @@
+<!-- 
+  - @author    Ionic Bucket <ionicbucket@gmail.com>
+  - @copyright Copyright (c) 2017
+  - @license   Fulcrumy
+-->
+<!-- Notification Page -->
+
+<!-- Header Part -->
+<ion-header no-border>
+
+  <ion-navbar color="white">
+    <!-- Page title -->
+    <ion-title>Notification</ion-title>
+    <ion-buttons end>
+      <!-- Button: Refresh -->
+      <button ion-button icon-only color="default" clear (click)="refresh()">
+        <ion-icon name="refresh"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+<!-- End Header Part -->
+
+<!-- Body content -->
+<ion-content>
+  <!-- A pulldown to refresh functionality in your apps -->
+  <ion-refresher (ionRefresh)="doRefresh($event);">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <!-- Display list of notification -->
+  <ion-item-group *ngFor="let notification of notifications | datefilter: '-timestamp'; let i = index;">
+    <ion-item [ngClass]="{'unread': notification.status === 'unread', 'read': notification.status === 'read'}">
+
+      <!-- User Image -->
+      <ion-avatar item-start (click)="gotoUserProfile(notification.sender, notification.key, i)">
+        <img [src]="notification.userImage">
+      </ion-avatar>
+
+      <h3>
+        <!-- User name -->
+        <strong (click)="gotoUserProfile(notification.sender, notification.key, i)"> 
+          {{notification.userName}}
+        </strong>
+
+        <!-- Notification type options -->
+        <span *ngIf="notification.type == 'comment'" (click)="gotoSinglePostPage(notification.receiver, notification.postkey, notification.key, i)">
+           commented on your <b>post</b>
+        </span>
+        <span *ngIf="notification.type == 'like'" (click)="gotoSinglePostPage(notification.receiver, notification.postkey, notification.key, i)">
+           liked on your <b>post</b>
+        </span>
+        <span *ngIf="notification.type == 'following'"> 
+            started following you
+        </span>
+      </h3>
+
+      <!-- Date of notification -->
+      <p>
+        {{notification.timestamp | date }} at {{notification.timestamp | date: 'shortTime'}}
+      </p>
+
+    </ion-item>
+
+  </ion-item-group>
+
+  <!-- If the page is blank then it will show -->
+  <div id="not-found" *ngIf="notifications.length == 0">
+    <h2>Nothing Found</h2>
+  </div>
+
+  <!--  Infinite Scroll -->
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)" distance="10%">
+    <ion-infinite-scroll-content *ngIf="!finished" loadingSpinner="bubbles" loadingText="Loading more data..."></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+</ion-content>
+<!-- End body content -->

@@ -1,0 +1,26 @@
+<!-- 
+  - @author    Ionic Bucket <ionicbucket@gmail.com>
+  - @copyright Copyright (c) 2017
+  - @license   Fulcrumy
+-->
+<!-- Chat Page -->
+
+<!-- Header Part -->
+<ion-header no-border>
+  <ion-navbar color="white">
+    <ion-buttons start>
+      <button ion-button color="default" clear (click)="dismiss()">
+        <ion-icon name="close" style="zoom:2.0;"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>chat</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<!-- Body contents -->
+<ion-content padding>
+  <ion-tabs>
+    <ion-tab tabIcon="chatboxes" tabTitle="Chat History" [root]="tab1"></ion-tab>
+    <ion-tab tabIcon="person" tabTitle="Contacts" [root]="tab2"></ion-tab>
+  </ion-tabs>
+</ion-content>

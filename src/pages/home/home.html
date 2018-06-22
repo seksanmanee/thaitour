@@ -1,0 +1,16 @@
+<!-- 
+  - @author    Ionic Bucket <ionicbucket@gmail.com>
+  - @copyright Copyright (c) 2017
+  - @license   Fulcrumy
+
+  ** Home Page
+-->
+<ion-content>
+  <ion-tabs>
+    <ion-tab tabIcon="home" [root]="tab1"></ion-tab>
+    <ion-tab tabIcon="people" [root]="tab2" tabBadge="{{totalRequest}}" tabBadgeStyle="danger"></ion-tab>
+    <ion-tab tabIcon="locate" [root]="tab3"></ion-tab>
+    <ion-tab tabIcon="notifications" [root]="tab4" tabBadge="{{unreadNotification}}" tabBadgeStyle="danger" (ionSelect)="clickNotificationTab()"></ion-tab>
+    <ion-tab tabIcon="person" [root]="tab5"></ion-tab>
+  </ion-tabs>
+</ion-content>

@@ -1,0 +1,51 @@
+<!-- 
+  - @author    Ionic Bucket <ionicbucket@gmail.com>
+  - @copyright Copyright (c) 2017
+  - @license   Fulcrumy
+
+  ** Friend Request Page
+-->
+
+<ion-header no-border>
+  <ion-navbar color="white">
+    <ion-title>Friend Requests</ion-title>
+
+    <ion-buttons end>
+      <!-- Button: Refresh -->
+      <button ion-button icon-only color="default" clear (click)="refresh()">
+        <ion-icon name="refresh"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-refresher (ionRefresh)="doRefresh($event);">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <!-- Display List of Friend Request -->
+  <ion-list *ngIf="friendRequestList.length > 0">
+    <ion-item *ngFor="let request of friendRequestList; let i = index">
+
+      <!-- User profile picture -->
+      <ion-thumbnail item-start (click)="gotoUserProfile(request.uid)">
+        <img [src]="request.image">
+      </ion-thumbnail>
+
+      <!-- User profile name -->
+      <p (click)="gotoUserProfile(request.uid)">{{request.name}}</p>
+
+
+      <button ion-button round (click)="acceptFriendRequest(request.uid, i)">Confirm</button>
+
+      <!-- Decline Friend Request  -->
+      <button ion-button round (click)="declineFriendRequest(request.uid, i)">Remove</button>
+    </ion-item>
+  </ion-list>
+
+  <!-- This part can be seen when the list is empty -->
+  <div id="not-found" *ngIf="friendRequestList.length == 0">
+    <h2>Nothing Found</h2>
+  </div>
+</ion-content>

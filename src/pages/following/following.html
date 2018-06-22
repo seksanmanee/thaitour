@@ -1,0 +1,54 @@
+<!-- 
+  - @author    Ionic Bucket <ionicbucket@gmail.com>
+  - @copyright Copyright (c) 2017
+  - @license   Fulcrumy
+-->
+<!-- Following Page -->
+
+<ion-header no-border>
+  <ion-navbar color="white">
+    <ion-buttons start>
+      <button ion-button color="default" clear (click)="dismiss()">
+        <ion-icon name="close" style="zoom:2.0;"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>Following</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <!--
+    -  ** Search Option **
+    -  The below search box will help to find out the particular user from the following user's list
+  -->
+  <ion-searchbar animated="true" autocomplete="on" (ionInput)="getSearchResult($event)">
+  </ion-searchbar>
+
+  <br>
+
+  <!-- Display following user's list -->
+  <ion-list>
+    <ion-item *ngFor="let user of followingLists; let i = index">
+
+      <!-- User profile picture -->
+      <ion-avatar item-start (click)="gotoUserProfile(user.uid)">
+        <img [src]="user.image">
+      </ion-avatar>
+
+      <!-- User profile name -->
+      <h2 (click)="gotoUserProfile(user.uid)">{{ user.name }}</h2>
+
+      <!-- Unfollow button -->
+      <button ion-button color="dark" item-right outline *ngIf="user.isFollowing" (click)="unFollow(user)">
+        Following
+      </button>
+
+      <!-- Follow user -->
+      <button ion-button color="default" item-right outline *ngIf="!user.isFollowing" (click)="follow(user)">
+        Follow
+      </button>
+
+    </ion-item>
+  </ion-list>
+
+</ion-content>

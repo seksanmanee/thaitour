@@ -1,0 +1,83 @@
+<!-- Generated template for the UserProfileIntroductionComponent component -->
+
+<ion-grid id="user-introduction">
+
+  <ion-row>
+    <ion-col col-12 text-center>
+      <img *ngIf="user.name" [src]="user.image" [alt]="user.name">
+    </ion-col>
+    <ion-col col-12 text-center>
+      <div class="fullname">{{user.name}}</div>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col col-12 text-center>
+      <ion-row *ngIf="!userId">
+        <button class="custom-btn" ion-button block outline color="default" (click)="gotoEditProfile()">
+          Edit you profile
+        </button>
+      </ion-row>
+
+      <ion-row *ngIf="userId">
+
+        <button *ngIf="userId === currentUserId" class="custom-btn" ion-button block color="default" outline (click)="gotoEditProfile()">
+          Edit you profile
+        </button>
+
+        <ion-col *ngIf="userId !== currentUserId">
+
+          <button ion-button outline color="danger" *ngIf="!user.isFollowing" (click)="followUser()">
+            Follow
+          </button>
+          <button ion-button outline color="danger" *ngIf="user.isFollowing" (click)="unfollowUser()">
+            Unfollow
+          </button>
+        </ion-col>
+
+        <ion-col *ngIf="userId !== currentUserId && user">
+          <!-- Add to current user friend list -->
+          <button *ngIf="!user.isFriend && !user.isReceivedFrndReq && !user.isSendFrndReq" ion-button outline color="primary" (click)="sendFriendRequest()">
+              Add Friend
+          </button>
+
+          <!-- Remove from user friend list  -->
+          <button *ngIf="user.isFriend" ion-button outline color="primary" (click)="unFriend()">
+              Unfriend
+          </button>
+
+          <button *ngIf="user.isReceivedFrndReq" ion-button outline color="primary" (click)="acceptFriendRequest()">
+              Confirm Request
+          </button>
+
+          <button *ngIf="user.isSendFrndReq" ion-button outline color="primary" (click)="cancelFrndReq()">
+              Cancel Request
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+  </ion-row>
+
+  <ion-row text-center margin-top class="custom-section">
+    <ion-col col-3 text-center>
+      <div *ngIf="user.totalPost" class="number-count">{{user.totalPost}}</div>
+      <div *ngIf="!user.totalPost" class="number-count">0</div>
+      <div class="title">Post</div>
+    </ion-col>
+    <ion-col col-3 text-center (click)="gotoFollowersPage()">
+      <div *ngIf="user.totalFollowers" class="number-count">{{user.totalFollowers}}</div>
+      <div *ngIf="!user.totalFollowers" class="number-count">0</div>
+      <div class="title">Followers</div>
+    </ion-col>
+    <ion-col col-3 text-center (click)="gotoFollowingPage()">
+      <div *ngIf="user.totalFollowing" class="number-count">{{user.totalFollowing}}</div>
+      <div *ngIf="!user.totalFollowing" class="number-count">0</div>
+      <div class="title">Following</div>
+    </ion-col>
+    <ion-col col-3 text-center (click)="gotoFriendsPage()">
+      <div *ngIf="friends" class="number-count">{{friends.length}}</div>
+      <div *ngIf="!friends" class="number-count">0</div>
+      <div class="title">Friends</div>
+    </ion-col>
+  </ion-row>
+</ion-grid>

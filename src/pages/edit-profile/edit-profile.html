@@ -1,0 +1,97 @@
+<!-- 
+  - @author    Ionic Bucket <ionicbucket@gmail.com>
+  - @copyright Copyright (c) 2017
+  - @license   Fulcrumy
+-->
+<!-- User Edit Profile Page -->
+
+<!-- Header Part -->
+<ion-header no-border>
+  <ion-navbar color="white">
+    <ion-buttons start>
+      <!-- Close Modal -->
+      <button ion-button color="default" clear (click)="dismiss()">
+        <ion-icon name="close" style="zoom:2.0;"></ion-icon>
+      </button>
+    </ion-buttons>
+    <!-- Page Title -->
+    <ion-title>Edit Profile</ion-title>
+  </ion-navbar>
+</ion-header>
+<!-- End Header Part -->
+
+<!-- Body Content Part -->
+<ion-content>
+
+  <!-- User Profile Photo Option -->
+  <ion-card color="light">
+    <div text-center>
+
+      <!-- Button of change photo -->
+      <ion-fab top (click)="changeProfilePhoto()">
+        <button ion-fab mini color="default">
+          <ion-icon name="create"></ion-icon>
+        </button>
+      </ion-fab>
+
+      <!-- Profile Picture -->
+      <ion-img [src]="user.image" [alt]="user.name"></ion-img>
+      <br>
+
+      <!--
+        - Update Profile Photo
+        - This button hide initially, show this option when `userNewImage` are available
+      -->
+      <button ion-button color="default" clear *ngIf="userNewImage" (click)="updateProfilePhoto()">
+        <span class="change-photo">Update Photo</span>
+      </button>
+    </div>
+  </ion-card>
+
+  <!-- Personal Information Update Section -->
+  <ion-list>
+    <!-- Heading -->
+    <ion-list-header>
+      Personal Information
+    </ion-list-header>
+
+    <!-- User Name Input Field -->
+    <ion-item>
+      <ion-label floating>Name</ion-label>
+      <ion-input type="text" class="ion-ios-locked-outline" name="name" [(ngModel)]="user.name"></ion-input>
+    </ion-item>
+
+    <!-- Bio Input Field -->
+    <ion-item>
+      <ion-label floating>Bio</ion-label>
+      <ion-input type="text" class="ion-ios-locked-outline" name="bio" [(ngModel)]="user.bio"></ion-input>
+    </ion-item>
+
+    <!-- Birthday Input Field -->
+    <ion-item>
+      <ion-label floating>Birthday</ion-label>
+      <input type="datetime-local">
+      <ion-datetime displayFormat="MMM DD YYYY" class="ion-ios-locked-outline" [(ngModel)]="user.birthday"></ion-datetime>
+    </ion-item>
+
+    <!-- Phone Number Input Field -->
+    <ion-item>
+      <ion-label floating>Phone</ion-label>
+      <ion-input type="text" class="ion-ios-locked-outline" name="phone" [(ngModel)]="user.phone"></ion-input>
+    </ion-item>
+
+    <!-- Website Input Field -->
+    <ion-item>
+      <ion-label floating>Website</ion-label>
+      <ion-input type="text" class="ion-ios-locked-outline" name="website" [(ngModel)]="user.website"></ion-input>
+    </ion-item>
+
+    <br>
+
+    <!-- Update button of user information -->
+    <button ion-button block round color="default" (click)="updateUserInfo()">
+      Update
+    </button>
+  </ion-list>
+</ion-content>
+<!-- End Body Content Part -->

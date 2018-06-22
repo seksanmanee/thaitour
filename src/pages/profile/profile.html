@@ -1,0 +1,42 @@
+<!-- 
+  - @author    Ionic Bucket <ionicbucket@gmail.com>
+  - @copyright Copyright (c) 2017
+  - @license   Fulcrumy
+-->
+<!-- Profile Page Contents -->
+
+<!-- Header part -->
+<ion-header no-border>
+  <ion-navbar color="white">
+    <ion-buttons start>
+      <!--Refresh button of profile page  -->
+      <button ion-button icon-only color="default" clear (click)="refresh()">
+        <ion-icon name="refresh"></ion-icon>
+      </button>
+    </ion-buttons>
+
+    <!-- Page title  -->
+    <ion-title>Profile</ion-title>
+
+    <ion-buttons end>
+      <!-- Discover People Page Button Option -->
+      <button ion-button icon-only (click)="gotoDiscoverPeople()">
+        <ion-icon name="person-add"></ion-icon>
+      </button>
+
+      <!-- Settings Page Button Option  -->
+      <button ion-button icon-only (click)="gotoSettingsPage()">
+        <ion-icon name="more"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<!-- Body content part -->
+<ion-content>
+  <!-- Introduction  -->
+  <user-profile-introduction></user-profile-introduction>
+  <br>
+  <!-- Post status timeline  -->
+  <timeline></timeline>
+</ion-content>

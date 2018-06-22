@@ -1,0 +1,99 @@
+<!-- 
+  - @author    Ionic Bucket <ionicbucket@gmail.com>
+  - @copyright Copyright (c) 2017
+  - @license   Fulcrumy
+-->
+<!-- Timeline Contents -->
+
+<ion-content>
+
+  <!-- A pulldown to refresh functionality -->
+  <ion-refresher (ionRefresh)="doRefresh($event);">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <!-- Display list of timeline posts -->
+  <ion-card *ngFor="let post of posts | datefilter: '-createdDate'; let i = index">
+    <ion-item>
+
+      <!-- Post owner photo -->
+      <ion-avatar item-start>
+        <img *ngIf="post.userImage" [src]="post.userImage">
+      </ion-avatar>
+
+      <!-- Post status options -->
+      <button ion-button item-right clear (click)="postOptions(post, i)">
+        <ion-icon name="more" style="zoom:2.0;"></ion-icon>
+      </button>
+
+      <!-- Post owner name -->
+      <h2>{{ post.userName }}</h2>
+
+      <!-- Status posted time -->
+      <ion-note>
+        {{ post.createdDate | timeAgo }}
+      </ion-note>
+
+    </ion-item>
+
+    <!-- Status feature image -->
+    <img *ngIf="post.featureImage" [src]="post.featureImage">
+
+    <!-- Status contents -->
+    <ion-card-content>
+      <p>{{post.text}}</p>
+    </ion-card-content>
+
+    <!-- Total Like & Comments -->
+    <ion-row padding>
+      <ion-col *ngIf="post.totalLikes">
+        <ion-icon name="thumbs-up" color="default"></ion-icon> {{post.totalLikes}} Likes
+      </ion-col>
+      <ion-col *ngIf="post.totalComments">
+        <div float-right (tap)="gotoCommentPage(post)">
+          {{post.totalComments}} Comments
+        </div>
+      </ion-col>
+    </ion-row>
+
+    <!-- Like,comments and share option -->
+    <ion-row>
+
+      <!-- Like/Unlike Option  -->
+      <ion-col>
+        <button ion-button icon-left clear small *ngIf="!post.isLike" (tap)="likePost(post.key, post.uid, i)">
+          <ion-icon name="thumbs-up"></ion-icon>
+          <div>Like</div>
+        </button>
+        <button ion-button icon-left clear small color="default" *ngIf="post.isLike" (tap)="unlikePost(post.key, i);">
+          <ion-icon name="thumbs-down"></ion-icon>
+          <div>Unlike</div>
+        </button>
+      </ion-col>
+
+      <!-- Share Option  -->
+      <ion-col>
+        <button ion-button icon-left clear small (tap)="shareOptions(post)">
+          <ion-icon name="share"></ion-icon>
+          <div>Share</div>
+        </button>
+      </ion-col>
+
+      <!-- Comment Option  -->
+      <ion-col>
+        <button ion-button icon-left clear small (tap)="gotoCommentPage(post)" float-right>
+          <ion-icon name="text"></ion-icon>
+          <div>Comment</div>
+        </button>
+      </ion-col>
+    </ion-row>
+
+  </ion-card>
+
+  <!--  Infinite Scroll -->
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)" distance="10%">
+    <ion-infinite-scroll-content *ngIf="!finished" loadingSpinner="bubbles" loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+</ion-content>

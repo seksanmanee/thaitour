@@ -1,0 +1,82 @@
+<!-- 
+  - @author    Ionic Bucket <ionicbucket@gmail.com>
+  - @copyright Copyright (c) 2017
+  - @license   Fulcrumy
+-->
+<!-- SignIn Page Contents -->
+
+<ion-content class="signin-body-content" padding>
+  <ion-row class="logo-row">
+    <ion-col>
+      <img src="https://s3-us-west-2.amazonaws.com/fulcrumy-ionic2/ionicbucket-socialapp/project-resource/socialapp-logo.png" />
+    </ion-col>
+  </ion-row>
+  <div class="signin-box">
+    <p class="title">Sign In</p>
+    <form [formGroup]="signinForm" novalidate>
+      <ion-row>
+        <ion-col>
+          <!-- Display Error Messages -->
+          <div class="error-message" *ngIf="error">
+            <p>{{error}}</p>
+          </div>
+          <ion-list inset>
+            <!-- Email -->
+            <ion-item>
+              <ion-label>
+                <ion-icon color="default" name="md-mail"></ion-icon>
+              </ion-label>
+              <ion-input formControlName="email" type="email" placeholder="Your email address" class="ion-ios-locked-outline" [(ngModel)]="signinForm.email"
+                [class.invalid]="!signinForm.controls.email.valid && signinForm.controls.email.dirty">
+              </ion-input>
+            </ion-item>
+            <div class="error-message" *ngIf="!signinForm.controls.email.valid  && signinForm.controls.email.dirty">
+              <p>Please enter a valid email address.</p>
+            </div>
+
+            <!-- Password -->
+            <ion-item>
+              <ion-label>
+                <ion-icon color="default" name="md-eye"></ion-icon>
+              </ion-label>
+              <ion-input formControlName="password" type="password" placeholder="Your password" class="ion-ios-locked-outline" [(ngModel)]="signinForm.password"
+                [class.invalid]="!signinForm.controls.password.valid && signinForm.controls.password.dirty"></ion-input>
+            </ion-item>
+            <div class="error-message" *ngIf="!signinForm.controls.password.valid  && signinForm.controls.password.dirty">
+              <p>Please Enter Your Password.</p>
+            </div>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col class="signin-col">
+          <!-- Login Button -->
+          <button ion-button type="submit" color="default" block class="btn btn-primary" [disabled]="!signinForm.valid" (click)="submitSigninForm()">Sign In</button>
+
+          <!-- Login With Facebook  -->
+          <button ion-button color="white" clear (click)="loginUserWithFacebook()">
+            <ion-icon name="logo-facebook">  Log in with Facebook </ion-icon>
+          </button>
+
+          <div class="custom">OR</div>
+
+          <!--  Forget Password Button -->
+          <button ion-button color="light" clear (click)="openForgotPasswordPage()">
+            Forget Password
+          </button>
+
+          <!-- Sign Up Button  -->
+          <button ion-button block clear color="light" clear (click)="gotoSignUpPage()">
+            Dont have an account? Sign Up
+          </button>
+        </ion-col>
+      </ion-row>
+    </form>
+  </div>
+  <ion-row>
+    <ion-col>
+      <button ion-button full clear color="dark" (click)="gotoLandingPage()">Back</button>
+    </ion-col>
+  </ion-row>
+</ion-content>

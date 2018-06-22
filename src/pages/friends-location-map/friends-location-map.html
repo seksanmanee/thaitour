@@ -1,0 +1,42 @@
+<!-- 
+  - @author    Ionic Bucket <ionicbucket@gmail.com>
+  - @copyright Copyright (c) 2017
+  - @license   Fulcrumy
+
+  ** Friend Location Map
+-->
+<ion-header no-border>
+  <ion-navbar color="white">
+    <ion-buttons start>
+      <!-- Refresh -->
+      <button ion-button icon-only (click)="refreshPage()">
+        <ion-icon name="refresh"></ion-icon>
+      </button>
+      <!-- Open Friends Location Page  -->
+      <button ion-button icon-only (click)="gotoFriendsLocationList()">
+        <ion-icon name="list"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>Discover Map</ion-title>
+    <ion-buttons end>
+      <!-- Update Location -->
+      <button ion-button icon-only (click)="updateShareLocation()">
+        <ion-icon name="pin"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <!-- Map  -->
+  <div #map id="map" [ngClass]="(showDirectionDetails == false)? 'fullmap':'halfmap'"></div>
+  <!-- DIrection Details  -->
+  <ion-card *ngIf="showDirectionDetails">
+    <ion-card-header>
+      Details
+    </ion-card-header>
+    <ion-card-content>
+      <div #directionsRoutes></div>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

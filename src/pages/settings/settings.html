@@ -1,0 +1,49 @@
+<!-- 
+  - @author    Ionic Bucket <ionicbucket@gmail.com>
+  - @copyright Copyright (c) 2017
+  - @license   Fulcrumy
+
+  - Settings Page 
+-->
+
+<ion-header no-border>
+  <ion-navbar color="white">
+    <ion-buttons start>
+      <!-- Close button -->
+      <button ion-button color="default" clear (click)="dismiss()">
+        <ion-icon name="close" style="zoom:2.0;"></ion-icon>
+      </button>
+    </ion-buttons>
+    <!-- Page title -->
+    <ion-title>Settings</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+    <!-- Change Email -->
+    <button ion-item (click)="gotoEmailChangePage()">
+      Change Email
+    </button>
+
+    <!-- Change Password -->
+    <button ion-item (click)="gotoPasswordChangePage()">
+      Change Password
+    </button>
+
+    <!-- Open User Profile -->
+    <button ion-item (click)="gotoEditProfile()">
+      Edit Profile
+    </button>
+
+    <!-- Change Status of Share Location -->
+    <button ion-item (click)="updateShareLocation()">
+      Change Location Status
+    </button>
+
+    <!-- Logout -->
+    <button ion-item (click)="logout()">
+      Logout
+    </button>
+  </ion-list>
+</ion-content>

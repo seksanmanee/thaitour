@@ -1,0 +1,39 @@
+page-edit-profile {
+  
+  ion-card {
+    text-align: center;
+    ion-fab {
+      left: 52%;
+    }
+    ion-img {
+      margin-top: 5%;
+      border-radius: 50%;
+      width: 90px;
+      height: 90px;
+      img {
+        border-radius: 50%;
+        border: 1px solid #d61347;
+        width: 90px;
+        height: 90px;
+      }
+    }
+    .change-photo {
+      font-size: 14px;
+      font-weight: bold;
+    }
+  }
+
+  ion-list {
+    ion-list-header {
+      ion-label {
+        color: #d61347;
+        font-weight: bold;
+      }
+    }
+    ion-item {
+      ion-label {
+        color: #a9a5a5;
+      }
+    }
+  }
+}

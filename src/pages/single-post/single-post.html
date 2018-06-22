@@ -1,0 +1,88 @@
+<!-- 
+  - @author    Ionic Bucket <ionicbucket@gmail.com>
+  - @copyright Copyright (c) 2017
+  - @license   Fulcrumy
+
+  * Single Post Page
+-->
+
+<ion-header no-border>
+  <ion-navbar color="white">
+    <ion-buttons start>
+      <button ion-button color="default" clear (click)="dismiss()">
+        <ion-icon name="close" style="zoom:2.0;"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>Post</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-item>
+      <!-- Post owner photo -->
+      <ion-avatar item-start>
+        <img *ngIf="postInfo.userImage" [src]="postInfo.userImage">
+      </ion-avatar>
+
+      <!-- Post Owner Name  -->
+      <h2>{{ postInfo.userName }}</h2>
+
+      <!-- Status posted time -->
+      <ion-note>
+        {{ postInfo.createdDate | timeAgo }}
+      </ion-note>
+    </ion-item>
+
+    <!-- Status feature image -->
+    <img *ngIf="postInfo.featureImage" [src]="postInfo.featureImage">
+
+    <!-- Status Contents -->
+    <ion-card-content>
+      <p>{{postInfo.text}}</p>
+    </ion-card-content>
+
+    <!-- Total Like & Comments -->
+    <ion-row padding>
+      <ion-col *ngIf="postInfo.totalLikes">
+        <ion-icon name="thumbs-up" color="default"></ion-icon> {{postInfo.totalLikes}} Likes
+      </ion-col>
+      <ion-col *ngIf="postInfo.totalComments">
+        <div float-right (tap)="gotoCommentPage()">
+          {{postInfo.totalComments}} Comments
+        </div>
+      </ion-col>
+    </ion-row>
+
+    <!-- Like, Comments and Share Options -->
+    <ion-row>
+      <!-- Like/Unlike Option  -->
+      <ion-col>
+        <button ion-button icon-left clear small *ngIf="!postInfo.isLike" (tap)="likePost(postInfo.key, postInfo.uid)">
+          <ion-icon name="thumbs-up"></ion-icon>
+          <div>Like</div>
+        </button>
+        <button ion-button icon-left clear small color="default" *ngIf="postInfo.isLike" (tap)="unlikePost(postInfo.key);">
+          <ion-icon name="thumbs-down"></ion-icon>
+          <div>Unlike</div>
+        </button>
+      </ion-col>
+
+      <!-- Share Option  -->
+      <ion-col>
+        <button ion-button icon-left clear small (tap)="shareOptions()">
+          <ion-icon name="share"></ion-icon>
+          <div>Share</div>
+        </button>
+      </ion-col>
+
+      <!-- Comment Option  -->
+      <ion-col>
+        <button ion-button icon-left clear small (tap)="gotoCommentPage()" float-right>
+          <ion-icon name="text"></ion-icon>
+          <div>Comment</div>
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-card>
+</ion-content>

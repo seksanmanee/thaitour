@@ -1,0 +1,104 @@
+<!-- 
+  - @author    Ionic Bucket <ionicbucket@gmail.com>
+  - @copyright Copyright (c) 2017
+  - @license   Fulcrumy
+-->
+<!-- Signup Page Contents -->
+
+<ion-content class="signup-body-content" padding>
+
+  <ion-row class="logo-row">
+    <ion-col>
+      <img src="https://s3-us-west-2.amazonaws.com/fulcrumy-ionic2/ionicbucket-socialapp/project-resource/socialapp-logo.png" />
+    </ion-col>
+  </ion-row>
+
+  <div class="signup-box">
+    <p class="title">Sign Up</p>
+    <form [formGroup]="signupForm" novalidate>
+      <ion-row>
+        <ion-col>
+          <!-- Display Error Messages -->
+          <div class="error-message" *ngIf="error">
+            <p>{{error}}</p>
+          </div>
+          <ion-list inset>
+
+            <!-- User Name -->
+            <ion-item>
+              <ion-label>
+                <ion-icon color="default" name="md-person"></ion-icon>
+              </ion-label>
+              <ion-input formControlName="displayName" type="text" class="ion-ios-locked-outline" placeholder="Your Display Name" [(ngModel)]="signupForm.displayName"
+                [class.invalid]="!signupForm.controls.displayName.valid && signupForm.controls.displayName.dirty">
+              </ion-input>
+            </ion-item>
+
+            <!-- Display error messages for display name -->
+            <div class="error-message" *ngIf="!signupForm.controls.displayName.valid  && signupForm.controls.displayName.dirty">
+              <p>Please enter a displayName.</p>
+            </div>
+
+            <!-- Email -->
+            <ion-item>
+              <ion-label>
+                <ion-icon color="default" name="md-mail"></ion-icon>
+              </ion-label>
+              <ion-input formControlName="email" type="email" class="ion-ios-locked-outline" placeholder="Your email address" [(ngModel)]="signupForm.email"
+                [class.invalid]="!signupForm.controls.email.valid && signupForm.controls.email.dirty">
+              </ion-input>
+            </ion-item>
+
+            <!-- Display error messages for email -->
+            <div class="error-message" *ngIf="!signupForm.controls.email.valid  && signupForm.controls.email.dirty">
+              <p>Please enter a valid email.</p>
+            </div>
+
+            <!-- Password -->
+            <ion-item>
+              <ion-label>
+                <ion-icon color="default" name="md-eye"></ion-icon>
+              </ion-label>
+              <ion-input formControlName="password" type="password" class="ion-ios-locked-outline" placeholder="Your password" [(ngModel)]="signupForm.password"
+                [class.invalid]="!signupForm.controls.password.valid && signupForm.controls.password.dirty">
+              </ion-input>
+            </ion-item>
+
+            <!-- Display error messages for password -->
+            <div class="error-message" *ngIf="!signupForm.controls.password.valid  && signupForm.controls.password.dirty">
+              <p>Your password needs more than 6 characters.</p>
+            </div>
+
+            <!-- Confirm Password -->
+            <ion-item>
+              <ion-label>
+                <ion-icon color="default" name="md-eye"></ion-icon>
+              </ion-label>
+              <ion-input formControlName="confirmPassword" type="password" class="ion-ios-locked-outline" placeholder="Confirm Password"
+                name="confirmPassword" [class.invalid]="!signupForm.controls.confirmPassword.valid && signupForm.controls.confirmPassword.dirty">
+              </ion-input>
+            </ion-item>
+
+            <!-- Display error messages for confirm password -->
+            <div class="error-message" *ngIf="!signupForm.controls.confirmPassword.valid  && signupForm.controls.confirmPassword.dirty">
+              <p>Password mismatch.</p>
+            </div>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col class="signup-col">
+          <button ion-button full color="default" (click)="signup()" [disabled]="!signupForm.valid">Sign Up</button>
+          <button ion-button block clear color="light" (click)="gotoSignInPage()">Ready have an account?  Sign In</button>
+        </ion-col>
+      </ion-row>
+    </form>
+  </div>
+
+  <ion-row>
+    <ion-col>
+      <button ion-button full clear color="dark" (click)="gotoLandingPage()">Back</button>
+    </ion-col>
+  </ion-row>
+</ion-content>

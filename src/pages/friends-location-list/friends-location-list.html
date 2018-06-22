@@ -1,0 +1,44 @@
+<!-- 
+  - @author    Ionic Bucket <ionicbucket@gmail.com>
+  - @copyright Copyright (c) 2017
+  - @license   Fulcrumy
+
+  ** List of Friend Location
+-->
+<ion-header>
+  <ion-navbar color="white">
+    <ion-buttons start>
+      <button ion-button color="default" clear (click)="dismiss()">
+        <ion-icon name="close" style="zoom:2.0;"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>Friends Location</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <!-- Display list of user locations data -->
+    <ion-item *ngFor="let list of friendList">
+
+      <!-- User profile picture -->
+      <ion-avatar item-start>
+        <img [src]="list.userImage">
+      </ion-avatar>
+
+      <!-- User profile name -->
+      <h2>{{list.userName}}</h2>
+
+      <!-- User curent address -->
+      <p text-wrap>{{list.address}}</p>
+
+      <!-- User direction -->
+      <button ion-button round icon-right (click)="showDirection(list)">
+        Get Direction <ion-icon name="compass"></ion-icon> 
+      </button>
+
+      <!-- Distance -->
+      <ion-badge color="default" item-end>{{list.distance}} miles</ion-badge>
+    </ion-item>
+  </ion-list>
+</ion-content>

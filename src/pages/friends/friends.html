@@ -1,0 +1,55 @@
+<!-- 
+  - @author    Ionic Bucket <ionicbucket@gmail.com>
+  - @copyright Copyright (c) 2017
+  - @license   Fulcrumy
+-->
+<!-- Friend List Page -->
+
+<ion-header no-border>
+
+  <ion-navbar color="white">
+    <ion-buttons start>
+      <!-- Modal close button  -->
+      <button ion-button color="default" clear (click)="dismiss()">
+        <ion-icon name="close" style="zoom:2.0;"></ion-icon>
+      </button>
+    </ion-buttons>
+    <!-- Page title  -->
+    <ion-title>Friend List</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+
+  <!-- User Search Option -->
+  <ion-searchbar animated="true" autocomplete="on" (ionInput)="getSearchResult($event)">
+  </ion-searchbar>
+
+  <br>
+
+  <!-- Display Friend List -->
+  <ion-list>
+    <ion-item *ngFor="let user of friendLists; let i = index">
+
+      <!-- User profile image -->
+      <ion-avatar item-start (click)="gotoUserProfile(user.uid)">
+        <img [src]="user.image">
+      </ion-avatar>
+
+      <!-- User profile name -->
+      <h2 (click)="gotoUserProfile(user.uid)">{{ user.name }}</h2>
+
+      <!-- Unfriend -->
+      <button ion-button color="dark" item-right outline *ngIf="user.isFriends" (click)="unfriend(user)">
+        Unfriend
+      </button>
+
+      <!-- Send Friend Request -->
+      <button ion-button color="default" item-right outline *ngIf="!user.isFriends" (click)="sendFriendRequest(user)">
+        Add Friend
+      </button>
+
+    </ion-item>
+  </ion-list>
+</ion-content>

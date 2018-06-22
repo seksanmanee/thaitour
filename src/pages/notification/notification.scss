@@ -1,0 +1,13 @@
+page-notification {
+    .read {
+        background: #ffffff;
+    }
+    .unread {
+        background: #f4f4f4;
+    }
+    #not-found {
+        text-align: center;
+        margin-top: 50%;
+        color: #656363;
+    }
+}

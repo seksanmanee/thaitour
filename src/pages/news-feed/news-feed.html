@@ -1,0 +1,145 @@
+<!-- 
+  - @author    Ionic Bucket <ionicbucket@gmail.com>
+  - @copyright Copyright (c) 2017
+  - @license   Fulcrumy
+
+  - Newsfeed Page Contents
+-->
+
+<!-- Header Part -->
+<ion-header no-border>
+  <ion-navbar color="white">
+
+    <ion-buttons start>
+      <!-- Button: Chat Page -->
+      <button ion-button icon-only id="mail-button" color="default" (click)="gotoChatPage()">
+        <ion-icon name="mail">
+          <!-- Total unread chat thread -->
+          <ion-badge id="mail-badge" color="primary" *ngIf="totalUnreadMsg">
+            {{totalUnreadMsg}}
+          </ion-badge> 
+        </ion-icon>
+      </button>
+    </ion-buttons>
+
+    <!-- Page Title -->
+    <ion-title>IonicBucket</ion-title>
+
+    <!-- Page right side actions -->
+    <ion-buttons end>
+      <!-- Button: Logout -->
+      <button ion-button icon-only (click)="logout()">
+        <ion-icon name="log-out"></ion-icon>
+      </button>
+      <!-- Button: Refresh -->
+      <button ion-button icon-only color="default" clear (click)="refresh()">
+        <ion-icon name="refresh"></ion-icon>
+      </button>
+    </ion-buttons>
+
+  </ion-navbar>
+</ion-header>
+
+<!-- Body contents -->
+<ion-content>
+
+  <!-- A pulldown to refresh functionality -->
+  <ion-refresher (ionRefresh)="doRefresh($event);">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <!-- Display list of user newsfeed posts -->
+  <ion-card *ngFor="let post of newsFeedPost | datefilter: '-createdDate'; let i = index">
+    <ion-item>
+
+      <!-- Post owner photo -->
+      <ion-avatar item-start>
+        <img *ngIf="post.userImage" [src]="post.userImage">
+      </ion-avatar>
+
+      <!-- Post status options -->
+      <button ion-button item-right clear (click)="postOptions(post, i)">
+        <ion-icon name="more" style="zoom:2.0;"></ion-icon>
+      </button>
+
+      <!-- Post owner name -->
+      <h2>{{ post.userName }}</h2>
+
+      <!-- Status posted time -->
+      <ion-note>
+        {{ post.createdDate | timeAgo }}
+      </ion-note>
+    </ion-item>
+
+    <!-- Status feature image -->
+    <img *ngIf="post.featureImage" [src]="post.featureImage">
+
+    <!-- Status contents -->
+    <ion-card-content>
+      <p>{{post.text}}</p>
+    </ion-card-content>
+
+    <!-- Total Like & Comments -->
+    <ion-row padding>
+      <ion-col *ngIf="post.totalLikes">
+        <ion-icon name="thumbs-up" color="default"></ion-icon> {{post.totalLikes}} Likes
+      </ion-col>
+      <ion-col *ngIf="post.totalComments">
+        <div float-right (tap)="gotoCommentPage(post)">
+          {{post.totalComments}} Comments
+        </div>
+      </ion-col>
+    </ion-row>
+
+    <!-- Like,comments and share options -->
+    <ion-row>
+
+      <!-- Like/Unlike Option  -->
+      <ion-col col-4>
+        <button ion-button icon-left clear small *ngIf="!post.isLike" (tap)="likePost(post.key, post.uid, i)">
+          <ion-icon name="thumbs-up"></ion-icon>
+          <div>Like</div>
+        </button>
+        <button ion-button icon-left clear small color="default" *ngIf="post.isLike" (tap)="unlikePost(post.key, i);">
+          <ion-icon name="thumbs-down"></ion-icon>
+          <div>Unlike</div>
+        </button>
+      </ion-col>
+
+      <!-- Share Option  -->
+      <ion-col col-4>
+        <button ion-button icon-left clear small (tap)="shareOptions(post)">
+          <ion-icon name="share"></ion-icon>
+          <div>Share</div>
+        </button>
+      </ion-col>
+
+      <!-- Comment Option  -->
+      <ion-col col-4>
+        <button ion-button icon-left clear small (tap)="gotoCommentPage(post)" float-right>
+          <ion-icon name="text"></ion-icon>
+          <div>Comment</div>
+        </button>
+      </ion-col>
+
+    </ion-row>
+  </ion-card>
+
+  <!-- Show When Empty News Feed -->
+  <div id="not-found" *ngIf="newsFeedPost.length == 0">
+    <h2>Nothing Found</h2>
+  </div>
+
+  <!--  Infinite Scroll -->
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)" distance="10%">
+    <ion-infinite-scroll-content *ngIf="!finished" loadingSpinner="bubbles" loadingText="Loading more data..."></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+  <!-- Button: Post Page -->
+  <ion-fab right bottom>
+    <button ion-fab color="default" (click)="openPostPage()">
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-fab>
+
+</ion-content>

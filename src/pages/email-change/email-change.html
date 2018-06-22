@@ -1,0 +1,63 @@
+<!-- 
+  - @author    Ionic Bucket <ionicbucket@gmail.com>
+  - @copyright Copyright (c) 2017
+  - @license   Fulcrumy
+-->
+<!-- Email Change Page -->
+
+<ion-header no-border>
+  <ion-navbar color="white">
+    <ion-buttons start>
+      <!-- Close Modal Button  -->
+      <button ion-button color="default" clear (click)="dismiss()">
+        <ion-icon name="close" style="zoom:2.0;"></ion-icon>
+      </button>
+    </ion-buttons>
+    <!-- Page Title -->
+    <ion-title>Change Email</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <form [formGroup]="emailForm">
+    <ion-list>
+      <!-- User Current Email Address -->
+      <ion-item>
+        <ion-label floating>Current Email Address</ion-label>
+        <ion-input type="email" class="ion-ios-locked-outline" formControlName="currentEmail" [(ngModel)]="emailForm.currentEmail"
+          [class.invalid]="!emailForm.controls.currentEmail.valid && emailForm.controls.currentEmail.dirty">
+        </ion-input>
+      </ion-item>
+
+      <ion-item class="error-message" *ngIf="!emailForm.controls.currentEmail.valid  && emailForm.controls.currentEmail.dirty">
+        <p>Please enter a valid email.</p>
+      </ion-item>
+
+      <!-- User Current Password -->
+      <ion-item>
+        <ion-label floating>Current Password</ion-label>
+        <ion-input type="password" class="ion-ios-locked-outline" [class.invalid]="!emailForm.controls.password.valid && emailForm.controls.password.dirty"
+          formControlName="password" [(ngModel)]="emailForm.password">
+        </ion-input>
+      </ion-item>
+
+      <!-- New Email Address -->
+      <ion-item>
+        <ion-label floating>New Email Address</ion-label>
+        <ion-input type="email" class="ion-ios-locked-outline" formControlName="newEmail" [class.invalid]="!emailForm.controls.newEmail.valid && emailForm.controls.newEmail.dirty"
+          [(ngModel)]="emailForm.newEmail">
+        </ion-input>
+      </ion-item>
+
+      <ion-item class="error-message" *ngIf="!emailForm.controls.newEmail.valid  && emailForm.controls.newEmail.dirty">
+        <p>Please enter a valid email.</p>
+      </ion-item>
+
+      <!-- Update button -->
+      <button ion-button type="submit" color="default" block class="btn btn-primary" [disabled]="!emailForm.valid" (click)="updateEmail()">
+        Update
+      </button>
+
+    </ion-list>
+  </form>
+</ion-content>

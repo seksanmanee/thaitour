@@ -1,0 +1,79 @@
+<!-- 
+  - @author    Ionic Bucket <ionicbucket@gmail.com>
+  - @copyright Copyright (c) 2017
+  - @license   Fulcrumy
+-->
+<!-- Post Page  -->
+
+<!-- Header Part -->
+<ion-header no-border>
+  <ion-navbar color="white">
+    <button ion-button color="default" clear (click)="dismiss()">
+      <ion-icon name="close" style="zoom:2.0;"></ion-icon>
+    </button>
+    <ion-buttons end>
+      <img *ngIf="userObj.name" [src]="userObj.image" [alt]="userObj.name">
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<!-- Body Part -->
+<ion-content class="has-header">
+
+  <!-- Status input textbox -->
+  <ion-row>
+    <ion-col>
+      <ion-textarea padding class="status-text" name="status" minlength="10" maxlength="150" required [(ngModel)]="postModel.text"
+        placeholder="What's happening?">
+      </ion-textarea>
+    </ion-col>
+  </ion-row>
+
+  <hr>
+
+  <!-- status feature images -->
+  <ion-row>
+    <ion-col>
+      <div id="post-img">
+        <img *ngIf="postModel.featureImage" [src]="postModel.featureImage">
+      </div>
+    </ion-col>
+  </ion-row>
+</ion-content>
+
+<!-- Footer Part -->
+<ion-footer class="custom-footer">
+  <ion-grid>
+    <ion-row>
+      <ion-col col-2>
+        <!-- Camera gallery button to open phone gallery option -->
+        <button ion-button color="white" clear>
+          <ion-icon name="images" (tap)="openCameraGallery()"></ion-icon>
+        </button>
+      </ion-col>
+      <ion-col col-2>
+        <!-- Camera button to open phone camera option -->
+        <button ion-button color="white" clear>
+          <ion-icon name="camera" (tap)="openCamera()"></ion-icon>
+        </button>
+      </ion-col>
+      <ion-col col-4>
+        <!-- Count status content and show the total lehgth of content -->
+        <button ion-button color="white" clear>
+          <span *ngIf="postModel.text">{{postModel.text.length}}</span>
+          <span *ngIf="!postModel.text">0</span>
+        </button>
+      </ion-col>
+      <ion-col col-4>
+        <!-- Add new post option button -->
+        <button ion-button color="white" float-right [disabled]="!postModel.text" *ngIf="!postModel.uid" (click)="newPost()">
+          Post
+        </button>
+        <!-- Update post option button -->
+        <button ion-button color="white" float-right *ngIf="postModel.uid" (click)="updatePost()">
+          Update Post
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-footer>

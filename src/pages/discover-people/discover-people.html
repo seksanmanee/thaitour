@@ -1,0 +1,52 @@
+<!-- 
+  - @author    Ionic Bucket <ionicbucket@gmail.com>
+  - @copyright Copyright (c) 2017
+  - @license   Fulcrumy
+-->
+<!-- Discover People/ Suggested User List -->
+
+<ion-header no-border>
+  <ion-navbar color="white">
+    <ion-buttons start>
+      <button ion-button color="default" clear (click)="dismiss()">
+        <ion-icon name="close" style="zoom:2.0;"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>Discover People</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher (ionRefresh)="doRefresh($event);">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-list>
+    <ion-item *ngFor="let user of suggestedUsers; let i=index">
+
+      <!-- User Profile Picture -->
+      <ion-thumbnail item-start (click)="gotoUserProfile(user.uid)">
+        <img [src]="user.image">
+      </ion-thumbnail>
+
+      <!-- User Profile Name -->
+      <h2 (click)="gotoUserProfile(user.uid)">{{user.name}}</h2>
+
+
+      <!-- Follow -->
+      <button ion-button outline color="danger" (click)="followUser(user.uid, i)">
+        Follow
+      </button>
+
+      <!-- Add Friend Request -->
+      <button ion-button outline color="primary" (click)="sendFriendRequest(user.uid, i)">
+        Add Friend
+      </button>
+    </ion-item>
+  </ion-list>
+
+  <!-- Show When Empty List -->
+  <div id="not-found" *ngIf="suggestedUsers.length == 0">
+    <h2>Nothing Found</h2>
+  </div>
+</ion-content>

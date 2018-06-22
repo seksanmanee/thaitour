@@ -1,0 +1,28 @@
+page-news-feed {
+    .user-info {
+        img {
+            border-radius: 50%;
+            border: 1px solid red;
+            width: 70px;
+        }
+    }
+    #mail-button {
+        position: relative;
+        width: 42px;
+        top: 1px;
+        right: 1px;
+        overflow: visible!important;
+        #mail-badge {
+            background-color: red;
+            position: absolute;
+            top: -3px;
+            right: -3px;
+            border-radius: 100%;
+        }
+    }
+    #not-found {
+        text-align: center;
+        margin-top: 50%;
+        color: #656363;
+    }
+}

@@ -1,0 +1,45 @@
+<!-- 
+  - @author    Ionic Bucket <ionicbucket@gmail.com>
+  - @copyright Copyright (c) 2017
+  - @license   Fulcrumy
+-->
+<!-- Location share page -->
+
+<ion-header no-border>
+  <ion-navbar color="white">
+    <ion-buttons start>
+      <button ion-button color="default" clear (click)="dismiss()">
+        <ion-icon name="close" style="zoom:2.0;"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>Share Location</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-grid>
+
+    <ion-row text-center padding-top padding-bottom>
+      <h2 class="header">Share your location with your Friends</h2>
+    </ion-row>
+
+    <ion-row padding-top padding-bottom>
+      <button ion-button full color="default" (click)="getCurrentLocation()">
+        Share Location
+      </button>
+    </ion-row>
+
+    <ion-row text-center padding-top padding-bottom>
+      <h3>How does location sharing work?</h3>
+      <p>Share your location with all your friends. If you and a friend both added each other on IonicBucket, you can choose
+        to share your locations with each other.
+      </p>
+      <p>
+        <b>Your location on the map only updates when you have open IonicBucket.</b> So you don't have to worry about your
+        location being updated in the background or anything.
+      </p>
+      <p>And also don't worry you can change this location option from Settings.</p>
+    </ion-row>
+
+  </ion-grid>
+</ion-content>

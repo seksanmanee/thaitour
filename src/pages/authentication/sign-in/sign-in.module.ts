@@ -1,0 +1,24 @@
+/**
+ * @author    Ionic Bucket <ionicbucket@gmail.com>
+ * @copyright Copyright (c) 2017
+ * @license   Fulcrumy
+ * 
+ * This file represents module of SignIn page
+ */
+
+import { NgModule } from '@angular/core';
+import { IonicPageModule } from 'ionic-angular';
+import { SignInPage } from './sign-in';
+
+@NgModule({
+  declarations: [
+    SignInPage,
+  ],
+  imports: [
+    IonicPageModule.forChild(SignInPage),
+  ],
+  exports: [
+    SignInPage
+  ]
+})
+export class SignInPageModule { }

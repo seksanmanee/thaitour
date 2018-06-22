@@ -1,0 +1,40 @@
+<!-- 
+  - @author    Ionic Bucket <ionicbucket@gmail.com>
+  - @copyright Copyright (c) 2017
+  - @license   Fulcrumy
+-->
+<!-- Recent Chat History -->
+
+<ion-content padding>
+  <ion-list>
+
+    <!-- A pulldown to refresh functionality -->
+    <ion-refresher (ionRefresh)="doRefresh($event);">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+
+    <!-- Display list of chat history -->
+    <ion-item *ngFor="let history of chatHistory | datefilter: '-chatLastTime'; let i = index" (click)="gotoChatBox(history, i)"
+      [ngClass]="{'read': history.unreadMsg, 'unread': !history.unreadMsg}">
+
+      <!-- User Profile Picture -->
+      <ion-avatar item-start>
+        <img [src]="history.image">
+      </ion-avatar>
+
+      <!-- User profile name -->
+      <h2>{{ history.name }}</h2>
+
+      <!-- Last Chat Time -->
+      <p>{{history.chatLastTime | timeAgo}}</p>
+
+      <!-- Total unread chat messages -->
+      <ion-badge item-end *ngIf="history.unreadMsg" color="default">{{history.unreadMsg}}</ion-badge>
+    </ion-item>
+
+    <!-- Show When Chat Recent History is Empty -->
+    <div id="not-found" *ngIf="chatHistory.length == 0">
+      <h2>Nothing Found</h2>
+    </div>
+  </ion-list>
+</ion-content>

@@ -1,0 +1,79 @@
+<!-- 
+  - @author    Ionic Bucket <ionicbucket@gmail.com>
+  - @copyright Copyright (c) 2017
+  - @license   Fulcrumy
+
+  * Particular Post Comment Page
+-->
+
+<ion-header no-border>
+  <ion-navbar color="white">
+    <ion-buttons start>
+      <!-- Close Modal -->
+      <button ion-button color="default" clear (click)="dismiss()">
+        <ion-icon name="close" style="zoom:2.0;"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>Comments</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+  <!-- A pulldown to refresh functionality in your apps -->
+  <ion-refresher (ionRefresh)="doRefresh($event);">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <!-- Display list of post comments in this following list -->
+  <ion-list>
+    <ion-item *ngFor="let commnet of allComments | datefilter: '-createdDate'">
+      <ion-grid>
+        <ion-row>
+          <!-- Comment Owner Profile Photo -->
+          <ion-col col-2>
+            <ion-avatar item-start>
+              <img [src]="commnet.userImage">
+            </ion-avatar>
+          </ion-col>
+          <ion-col col-8>
+            <!-- Comment Owner Profile Name -->
+            <h2>{{commnet.userName}}</h2>
+            <!-- Comment Posted Time -->
+            <ion-note>
+              {{commnet.createdDate | timeAgo}}
+            </ion-note>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-2>
+          </ion-col>
+          <ion-col col-12>
+            <!-- Comment Text -->
+            <p text-wrap>{{commnet.text}}</p>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+  </ion-list>
+
+  <!--  Infinite Scroll -->
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)" distance="10%">
+    <ion-infinite-scroll-content *ngIf="!finished" loadingSpinner="bubbles" loadingText="Loading more data..."></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar padding position="bottom">
+    <!-- Commnet Input textarea -->
+    <ion-textarea [(ngModel)]="content" autofocus required placeholder="Add a comment" (keyup.enter)="newComment()">
+    </ion-textarea>
+    <ion-buttons end>
+      <!-- New Comment Button -->
+      <button ion-button color="default" clear icon-only end (click)="newComment()">
+        <ion-icon name="checkmark" style="zoom:2.0;"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

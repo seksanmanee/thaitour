@@ -1,0 +1,13 @@
+page-friend-request {
+    .list-ios>.item-block:first-child {
+        border-top: none;
+    }
+    .list-ios>.item-block:last-child {
+        border-bottom: none;
+    }
+    #not-found {
+        text-align: center;
+        margin-top: 50%;
+        color: #656363;
+    }
+}

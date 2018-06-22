@@ -1,0 +1,58 @@
+<!-- 
+  - @author    Ionic Bucket <ionicbucket@gmail.com>
+  - @copyright Copyright (c) 2017
+  - @license   Fulcrumy
+
+  - Chat Box
+-->
+
+<!-- Header Part -->
+<ion-header no-border>
+  <ion-navbar color="white">
+    <ion-buttons start>
+      <button ion-button color="default" clear (click)="dismiss()">
+        <ion-icon name="arrow-round-back" style="zoom:2.0;"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>{{receiverInfo.name}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class="chatPage" #content>
+  <div class="message-wrap">
+    <div *ngFor="let chat of chatMessages | async" class="message" [class.left]="receiverInfo.uid !== chat.to " [class.right]="receiverInfo.uid === chat.to">
+      <img class="user-img" *ngIf="receiverInfo.uid !== chat.to" [src]="receiverInfo.image" (click)="gotoUserProfile(receiverInfo.uid)">
+      <img class="user-img" *ngIf="receiverInfo.uid === chat.to" [src]="currentUserInfo.image" (click)="gotoUserProfile(currentUserInfo.userId)">
+      <div class="msg-detail">
+        <div class="msg-info">
+          <p>
+            <span *ngIf="receiverInfo.uid !== chat.to">{{receiverInfo.name}}</span>
+            <span *ngIf="receiverInfo.uid === chat.to">{{currentUserInfo.name}}</span> &nbsp;&nbsp;&nbsp;{{chat.timestamp
+            | timeAgo}}
+          </p>
+        </div>
+        <div class="msg-content">
+          <span class="triangle"></span>
+          <p class="line-breaker">{{chat.message}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>
+
+<ion-footer no-border>
+  <ion-grid class="input-wrap">
+    <ion-row>
+      <ion-col col-10>
+        <ion-textarea placeholder="Type here..." [(ngModel)]="textMsg" (click)="readAllMessages()" (keyup.enter)="sendMessage()"
+          (ionFocus)="onFocus()">
+        </ion-textarea>
+      </ion-col>
+      <ion-col col-2>
+        <button ion-button clear icon-only item-right color="default" (click)="sendMessage()">
+          <ion-icon name="ios-send" ios="ios-send" md="md-send"></ion-icon>
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-footer>

@@ -1,0 +1,36 @@
+<!-- 
+  - @author    Ionic Bucket <ionicbucket@gmail.com>
+  - @copyright Copyright (c) 2017
+  - @license   Fulcrumy
+-->
+<!-- List of User Chat Contacts -->
+
+<ion-content padding>
+
+  <!-- User Search Option -->
+  <ion-searchbar animated="true" autocomplete="on" (ionInput)="getSearchResult($event)">
+  </ion-searchbar>
+
+  <ion-list>
+    <!-- Display Friend List -->
+    <ion-item *ngFor="let user of friendLists; let i = index" (click)="gotoChatBox(user, i)" [ngClass]="{'read': user.unreadMsg, 'unread': !user.unreadMsg}">
+
+      <!-- User Profile Photo -->
+      <ion-avatar item-start>
+        <img [src]="user.image">
+      </ion-avatar>
+
+      <!-- User Name -->
+      <h2>{{ user.name }}</h2>
+
+      <!-- Total Number of Unread Chat Thread -->
+      <ion-badge item-end *ngIf="user.unreadMsg" color="default">{{user.unreadMsg}}</ion-badge>
+    </ion-item>
+
+    <!-- Show When Friend List is Empty -->
+    <div id="not-found" *ngIf="friendLists.length == 0">
+      <h2>Nothing Found</h2>
+    </div>
+
+  </ion-list>
+</ion-content>
